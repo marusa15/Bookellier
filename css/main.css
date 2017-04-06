@@ -1,0 +1,30 @@
+main {
+  padding-top: 100px;
+}
+
+main .row {
+  margin-bottom: 20px;
+}
+
+.box {
+  height: 200px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.black {
+  background-color: #cbd9ef;
+  color: white;
+}
+
+.green {
+  background-color: #f2cdec;
+}
+
+.orange {
+  background-color: #ede5c9;
+}
+
+.blue {
+  background-color: #c9edca;
+}
