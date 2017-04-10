@@ -15,9 +15,9 @@
  *
  **/
 .row {
-  max-width: 1000px;
+/*  max-width: 1000px; 
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 20px;*/
   margin: 0 auto;
 }
 
@@ -41,8 +41,9 @@
    * Half a gutter is 10px, 10/960 (context) = 1.041666%
    *
    */
-  padding-left: 1.04166666%;
-  padding-right: 1.04166666%;
+   
+  padding-left: -1.958333%%;
+  padding-right: 1.04166666%; 
 }
 
 /* Mobile defaults */

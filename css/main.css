@@ -1,30 +1,33 @@
-main {
+/*main {
   padding-top: 100px;
-}
+} */
 
 main .row {
   margin-bottom: 20px;
 }
 
 .box {
-  height: 200px;
+  height: 260px;
   text-align: center;
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
-.black {
-  background-color: #cbd9ef;
-  color: white;
+.header {
+  border-bottom: 2px solid black;
 }
 
-.green {
-  background-color: #f2cdec;
+.js-query {
+ width: 200px;
 }
 
-.orange {
-  background-color: #ede5c9;
+
+.col-3 .box .blue .js-search-results {
+  height: 1000px;
 }
 
-.blue {
-  background-color: #c9edca;
+.editors-picks > h3, .search-results {
+  border: 2px solid black;
+  padding: 10px;
+  margin-bottom: 5px;
 }
+
