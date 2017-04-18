@@ -1,6 +1,35 @@
+// defines object in which API data is stored
 var retrievedObject = {};
+// saves all changes due to user interactions
+var state = { "Similar": { // The value of Similar is an object thas 2 keys: Info and Results
+                  "Info": [  // Info has an array of objects as its value - authors or titles inserted by user
+                      {
+                      "Name": "Pulp Fiction",
+                      "Type": "movie"
+                      }
+                  ],
+                  "Results": [
+                      {
+                      "Name": "Reservoir Dogs",
+                      "Type": "movie",
+                      "Expanded": false
+                      },
+                      {
+                      "Name": "Death Proof",
+                      "Type": "movie"
+                      },
+                      {
+                      "Name": "Jackie Brown",
+                      "Type": "movie"
+                      }
+                      ]
+            }                   
+}
+
 
 var TasteKid_BASE_URL = 'https://www.tastekid.com/api/similar'; 
+
+//retrieves data from TasteKid API
 function getDataFromApi(searchTerm, callback) {
   var settings = {
     url: TasteKid_BASE_URL,
@@ -16,20 +45,32 @@ function getDataFromApi(searchTerm, callback) {
     success: callback
         
     
-  //  TasteKid_BASE_URL, query, callback
+  
   }
   $.ajax(settings);
+}
+
+// state-modifying functions
+
+// logs if the user clicked to read more about suggestion
+
+var logClick = function(state, index) {
+  console.log("Preverjamo index: " + state.Similar.Results[index]);
+  // adds key value pair
+   state.Similar.Results[index].expanded = true;
+   console.log(state); 
 }
 
 // display functions
 
 function displayTasteKidSearchData(data) {
-  retrievedObject = data; 
+  state = data;
+  console.log(state); 
   var resultElement = '';
   if (data.Similar.Results) {
     
-     data.Similar.Results.forEach(function(item) {
-     resultElement += '<h3 class="search-results">' + item.Name + '  <button class="more-info">+</button></h3><div class="description"></div>';
+     data.Similar.Results.forEach(function(item, index) {
+     resultElement += '<h3 class="search-results">' + item.Name + '  <button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
     });
   }
   
@@ -43,14 +84,12 @@ function displayTasteKidSearchData(data) {
 
 //when user clicks 'more', description displays
 
-var displayDescription = function (data, element) {
+var displayDescription = function (state, element, index) {
     
-    var teaser = retrievedObject.Similar.Results.map(function(item) {
-    return '<p>' + item.wTeaser + '</p>';
-        
-    });
+    var teaser = '<p>' + state.Similar.Results[index].wTeaser + '</p>';
+   
 
-    return element.html(teaser);
+   return element.html(teaser);
 }
 
 
@@ -70,7 +109,10 @@ function watchSubmit() {
 $('.js-search-results').on('click', '.more-info', function(event) {
   console.log("Hello more info!");
   event.preventDefault();
-  displayDescription(retrievedObject, $('.description'));
+  console.log('+' + $(this.closest('button')).attr('data-list-item-id'));
+  logClick(state, $(this.closest('button')).attr('data-list-item-id'));
+ 
+  displayDescription(state, $(this).next() , $(this.closest('button')).attr('data-list-item-id'));
 })
 
 
