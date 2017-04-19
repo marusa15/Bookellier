@@ -1,5 +1,6 @@
 // defines object in which API data is stored
-var retrievedObject = {};
+
+var currentItem;
 // saves all changes due to user interactions
 var state = { "Similar": { // The value of Similar is an object thas 2 keys: Info and Results
                   "Info": [  // Info has an array of objects as its value - authors or titles inserted by user
@@ -50,15 +51,23 @@ function getDataFromApi(searchTerm, callback) {
   $.ajax(settings);
 }
 
-// state-modifying functions
+// state modification functions
 
 // logs if the user clicked to read more about suggestion
 
-var logClick = function(state, index) {
-  console.log("Preverjamo index: " + state.Similar.Results[index]);
-  // adds key value pair
-   state.Similar.Results[index].expanded = true;
+var logClick = function(state, item) {
+  console.log("logclick dela!");
+  
+  var itemId = item;
+  currentItem = getItem(state, itemId);
+  state.Similar.Results[item].expanded = true;
    console.log(state); 
+}
+
+function getItem(state, itemIndex) {
+    console.log(itemIndex);
+    return state.Similar.Results[itemIndex]; // dobi/odpre aktualen item
+    
 }
 
 // display functions
@@ -84,12 +93,17 @@ function displayTasteKidSearchData(data) {
 
 //when user clicks 'more', description displays
 
-var displayDescription = function (state, element, index) {
+var displayDescription = function (state, element) {
     
-    var teaser = '<p>' + state.Similar.Results[index].wTeaser + '</p>';
+   console.log(state.Similar.Results.expanded);
+
+   
+  var teaser = '<p>' + currentItem.wTeaser + '</p>';
+  
+
    
 
-   return element.html(teaser);
+   return element.html(teaser); 
 }
 
 
@@ -107,12 +121,14 @@ function watchSubmit() {
 //clicks on 'more' button
 
 $('.js-search-results').on('click', '.more-info', function(event) {
-  console.log("Hello more info!");
+ 
   event.preventDefault();
   console.log('+' + $(this.closest('button')).attr('data-list-item-id'));
+  
   logClick(state, $(this.closest('button')).attr('data-list-item-id'));
+  console.log(state.Similar.Results.expanded);
  
-  displayDescription(state, $(this).next() , $(this.closest('button')).attr('data-list-item-id'));
+  displayDescription(state, $(this).next()); // next() determines WHERE in DOM the description will appear
 })
 
 
