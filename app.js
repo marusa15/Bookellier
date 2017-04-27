@@ -13,7 +13,9 @@ var state = { "Similar": { // The value of Similar is an object thas 2 keys: Inf
                       {
                       "Name": "Reservoir Dogs",
                       "Type": "movie",
-                      "Expanded": false
+                      "Expanded": false,
+                      "wTeaser": '',
+                      "Intro": 'Demons (Russian: Бесы, Bésy) is a novel by Fyodor Dostoyevsky, first published in the journal The Russian Messenger in 1871–2.',
                       },
                       {
                       "Name": "Death Proof",
@@ -49,6 +51,7 @@ function getDataFromApi(searchTerm, callback) {
   
   }
   $.ajax(settings);
+
 }
 
 // state modification functions
@@ -58,28 +61,44 @@ function getDataFromApi(searchTerm, callback) {
 var logClick = function(state, item) {
   console.log("logclick dela!");
   
-  var itemId = item;
-  currentItem = getItem(state, itemId);
+//  var itemId = item;
+  currentItem = getItem(state, item);
   state.Similar.Results[item].expanded = true;
-   console.log(state); 
+  console.log(state); 
 }
 
+// opens a specific result in the array of results
+
 function getItem(state, itemIndex) {
-    console.log(itemIndex);
     return state.Similar.Results[itemIndex]; // dobi/odpre aktualen item
     
+}
+
+// saves short description into state
+
+var makeShortIntro = function(state) {
+  
+  state.Similar.Results.forEach(function(item) {
+   
+   item["Intro"] = item.wTeaser.match( /[^\.!\?]+[\.!\?]+/g )[0];
+
+  });
+  
+  
 }
 
 // display functions
 
 function displayTasteKidSearchData(data) {
   state = data;
-  console.log(state); 
+  console.log(state);
+  makeShortIntro(state); 
   var resultElement = '';
   if (data.Similar.Results) {
     
      data.Similar.Results.forEach(function(item, index) {
-     resultElement += '<h3 class="search-results">' + item.Name + '  <button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
+     resultElement += '<h3 class="search-results">' + item.Name + ' - ' + item.Intro + '  <button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
+     
     });
   }
   
@@ -94,16 +113,12 @@ function displayTasteKidSearchData(data) {
 //when user clicks 'more', description displays
 
 var displayDescription = function (state, element) {
-    
-   console.log(state.Similar.Results.expanded);
-
    
-  var teaser = '<p>' + currentItem.wTeaser + '</p>';
+  var teaser = currentItem.wTeaser;
+
+  var teaser = '<p>' + teaser + '</p>';
   
-
-   
-
-   return element.html(teaser); 
+  return element.html(teaser); 
 }
 
 
@@ -115,6 +130,7 @@ function watchSubmit() {
     var query = $(this).find('.js-query').val();
     console.log("Hello");
     getDataFromApi(query, displayTasteKidSearchData);
+    
   });
 }
 
@@ -123,12 +139,11 @@ function watchSubmit() {
 $('.js-search-results').on('click', '.more-info', function(event) {
  
   event.preventDefault();
-  console.log('+' + $(this.closest('button')).attr('data-list-item-id'));
-  
+   
   logClick(state, $(this.closest('button')).attr('data-list-item-id'));
-  console.log(state.Similar.Results.expanded);
- 
+    
   displayDescription(state, $(this).next()); // next() determines WHERE in DOM the description will appear
+  
 })
 
 
