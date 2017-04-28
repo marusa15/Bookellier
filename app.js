@@ -29,6 +29,35 @@ var state = { "Similar": { // The value of Similar is an object thas 2 keys: Inf
             }                   
 }
 
+var recommendations = [
+                {
+                  Author: "Alessandro Baricco",
+                  Title: "Mr. Gwin" 
+                },
+                {
+                  Author: "Elizabeth Gilbert",
+                  Title: "The Signature of All Things"
+                },
+                {
+                  Author: "Patrick Modiano",
+                  Title: "Missing Person" 
+                },
+                {
+                  Author: "Rodaan Al Galidi",
+                  Title: "The autist and the carrier-pigeon" 
+                },
+                {
+                  Author: "Julian Barnes",
+                  Title: "The sense of an ending" 
+                },
+                {
+                  Author: "Paul Auster",
+                  Title: "Brooklyn Follies" 
+                } 
+]
+
+
+
 
 var TasteKid_BASE_URL = 'https://www.tastekid.com/api/similar'; 
 
@@ -70,6 +99,7 @@ var logClick = function(state, item) {
 // opens a specific result in the array of results
 
 function getItem(state, itemIndex) {
+    console.log(itemIndex);
     return state.Similar.Results[itemIndex]; // dobi/odpre aktualen item
     
 }
@@ -79,7 +109,7 @@ function getItem(state, itemIndex) {
 var makeShortIntro = function(state) {
   
   state.Similar.Results.forEach(function(item) {
-   
+   console.log('wteaser' + state);
    item["Intro"] = item.wTeaser.match( /[^\.!\?]+[\.!\?]+/g )[0];
 
   });
@@ -87,7 +117,7 @@ var makeShortIntro = function(state) {
   
 }
 
-// display functions
+// display functions 
 
 function displayTasteKidSearchData(data) {
   state = data;
@@ -121,6 +151,21 @@ var displayDescription = function (state, element) {
   return element.html(teaser); 
 }
 
+// displays editor's picks
+
+var displayRecommendations = function(recommendations, element) {
+
+  var recommendation = recommendations.map(function(item, index) {
+  
+  return '<p>' + item.Author + ' - ' + item.Title + '</p>'; 
+  console.log(recommendation); 
+  console.log(typeof recommendation); 
+  
+    
+  });
+  return  element.html(recommendation);  
+}
+
 
 // event listeners
 
@@ -143,6 +188,14 @@ $('.js-search-results').on('click', '.more-info', function(event) {
   logClick(state, $(this.closest('button')).attr('data-list-item-id'));
     
   displayDescription(state, $(this).next()); // next() determines WHERE in DOM the description will appear
+  
+})
+
+// clicks on Editor's picks button
+
+$('.js-editors-picks').click(function(event) {
+  event.preventDefault();
+  displayRecommendations(recommendations, $('.js-search-results'));
   
 })
 
