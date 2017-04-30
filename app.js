@@ -75,9 +75,7 @@ function getDataFromApi(searchTerm, callback) {
     dataType: 'jsonp', 
     type: 'GET',
     success: callback
-        
-    
-  
+ 
   }
   $.ajax(settings);
 
@@ -143,6 +141,8 @@ function displayTasteKidSearchData(data) {
 //when user clicks 'more', description displays
 
 var displayDescription = function (state, element) {
+
+  
    
   var teaser = currentItem.wTeaser;
 
@@ -179,7 +179,7 @@ function watchSubmit() {
   });
 }
 
-//clicks on 'more' button
+//clicks on 'more' button to display description
 
 $('.js-search-results').on('click', '.more-info', function(event) {
  
@@ -187,8 +187,8 @@ $('.js-search-results').on('click', '.more-info', function(event) {
    
   logClick(state, $(this.closest('button')).attr('data-list-item-id'));
     
-  displayDescription(state, $(this).next()); // next() determines WHERE in DOM the description will appear
-  
+  displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
+     
 })
 
 // clicks on Editor's picks button
