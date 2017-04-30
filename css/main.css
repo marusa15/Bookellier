@@ -19,7 +19,7 @@ main .row {
 .js-query {
  width: 500px;
  padding: 10px;
- text-align: center;
+ text-align: left;
 }
 
 .primary-btn {
@@ -39,7 +39,7 @@ main .row {
   height: 1000px;
 }
 
-.editors-picks > h3, .search-results {
+.editors-picks > h3, .js-search-results > h3, .teaser  {
   border: 2px solid black;
   padding: 10px;
   margin-bottom: 5px;
