@@ -69,7 +69,7 @@ function getDataFromApi(searchTerm, callback) {
       q: searchTerm,
       type: 'books',
       info: 1,
-      limit: 3,
+      limit: 4,
       k: '263777-Bookelli-ZCKH0EIS' 
     },
     dataType: 'jsonp', 
@@ -125,7 +125,7 @@ function displayTasteKidSearchData(data) {
   if (data.Similar.Results.length > 0) {
     
      data.Similar.Results.forEach(function(item, index) {
-     resultElement += '<h3 class="search-results">' + item.Name + ' - ' + item.Intro + '  <button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
+     resultElement += '<h3 class="search-results">' + item.Name + '<button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
     
     });
   }
@@ -133,7 +133,7 @@ function displayTasteKidSearchData(data) {
   else {
     console.log("No results");
     console.log(data.Similar.Results.length);
-    resultElement += '<p>No results</p>';
+    resultElement += '<p>Sorry, no results. Please try again.</p>';
   }
   
   $('.js-search-results').html(resultElement);

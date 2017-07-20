@@ -1,6 +1,4 @@
-/*main {
-  padding-top: 100px;
-} */
+/* in order of appearance */
 
 main .row {
   margin-bottom: 20px;
@@ -35,7 +33,7 @@ main .row {
   margin-left: 15px;
 }
 
-.col-3 .box .blue .js-search-results {
+.js-search-results {
   height: 1000px;
 }
 
@@ -45,7 +43,5 @@ main .row {
   margin-bottom: 5px;
 }
 
-.hidden {
-  display: none;
-}
+
 
