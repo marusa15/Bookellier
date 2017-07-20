@@ -25,7 +25,7 @@ var state = { "Similar": { // The value of Similar is an object thas 2 keys: Inf
                       "Name": "Jackie Brown",
                       "Type": "movie"
                       }
-                      ]
+                      ] 
             }                   
 }
 
@@ -122,16 +122,17 @@ function displayTasteKidSearchData(data) {
   console.log(state);
   makeShortIntro(state); 
   var resultElement = '';
-  if (data.Similar.Results) {
+  if (data.Similar.Results.length > 0) {
     
      data.Similar.Results.forEach(function(item, index) {
      resultElement += '<h3 class="search-results">' + item.Name + ' - ' + item.Intro + '  <button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
-     
+    
     });
   }
   
   else {
     console.log("No results");
+    console.log(data.Similar.Results.length);
     resultElement += '<p>No results</p>';
   }
   
@@ -173,7 +174,6 @@ function watchSubmit() {
   $('.js-search-form').submit(function(e) {
     e.preventDefault();
     var query = $(this).find('.js-query').val();
-    console.log("Hello");
     getDataFromApi(query, displayTasteKidSearchData);
     
   });
@@ -198,6 +198,34 @@ $('.js-editors-picks').click(function(event) {
   displayRecommendations(recommendations, $('.js-search-results'));
   
 })
+
+
+data: var recommendations = [
+                {
+                  Author: "Alessandro Baricco",
+                  Title: "Mr. Gwin" 
+                },
+                {
+                  Author: "Elizabeth Gilbert",
+                  Title: "The Signature of All Things"
+                },
+                {
+                  Author: "Patrick Modiano",
+                  Title: "Missing Person" 
+                },
+                {
+                  Author: "Rodaan Al Galidi",
+                  Title: "The autist and the carrier-pigeon" 
+                },
+                {
+                  Author: "Julian Barnes",
+                  Title: "The sense of an ending" 
+                },
+                {
+                  Author: "Paul Auster",
+                  Title: "Brooklyn Follies" 
+                } 
+]
 
 
 
