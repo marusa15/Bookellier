@@ -37,11 +37,28 @@ main .row {
   height: 1000px;
 }
 
-.editors-picks > h3, .js-search-results > div {
+.editors-picks > h3 {
   border: 2px solid black;
   padding: 10px;
   margin: 10px 0;
 }
+
+.book-cover {
+  border: 2px solid black;
+  padding: 20px 0 0 0;
+  margin: 30px 40px;
+  height: 300px;
+}
+
+.title {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 0 30px;
+}
+
+
+
+
 
 
 

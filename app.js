@@ -85,7 +85,7 @@ function displayTasteKidSearchData(data) {
   var resultElement = '';
   if (data.Similar.Results.length > 0) {
      data.Similar.Results.forEach(function(item, index) {
-     resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '">' + item.Name + '</div>';
+     resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '"><div class="book-cover"><div class="title">' + item.Name + '</div></div></div>';
     });
   }
   
