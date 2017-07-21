@@ -85,7 +85,7 @@ function displayTasteKidSearchData(data) {
   var resultElement = '';
   if (data.Similar.Results.length > 0) {
      data.Similar.Results.forEach(function(item, index) {
-     resultElement += '<div class="col-3">' + item.Name + '<button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></div>';
+     resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '">' + item.Name + '</div>';
     });
   }
   
@@ -128,7 +128,7 @@ function watchSubmit() {
 
 $('.js-search-results').on('click', '.more-info', function(event) {
   event.preventDefault();
-  logClick(state, $(this.closest('button')).attr('data-list-item-id'));
+  logClick(state, $(this.closest('div')).attr('data-list-item-id'));
   displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
 })
 
