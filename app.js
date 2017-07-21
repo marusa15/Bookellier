@@ -85,7 +85,7 @@ function displayTasteKidSearchData(data) {
   var resultElement = '';
   if (data.Similar.Results.length > 0) {
      data.Similar.Results.forEach(function(item, index) {
-     resultElement += '<h3 class="search-results">' + item.Name + '<button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></h3>';
+     resultElement += '<div class="col-6">' + item.Name + '<button class="more-info" data-list-item-id="'+ index + '">+</button><div class="description"></div></div>';
     });
   }
   
@@ -100,7 +100,7 @@ function displayTasteKidSearchData(data) {
 
 var displayDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
-  var teaser = '<p>' + teaser + '</p>';
+  var teaser = '<p>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a>';
   return element.html(teaser); 
 }
 
@@ -108,7 +108,7 @@ var displayDescription = function (state, element) {
 
 var displayRecommendations = function(recommendations, element) {
   var recommendation = recommendations.map(function(item, index) {
-  return '<p>' + item.Author + ' - ' + item.Title + '</p>'; 
+  return '<div>' + item.Author + ' - ' + item.Title + '</div>'; 
   });
   return  element.html(recommendation);  
 }
