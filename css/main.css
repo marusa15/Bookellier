@@ -33,10 +33,6 @@ main .row {
   margin-left: 15px;
 }
 
-.js-search-results {
-  height: 1000px;
-}
-
 .editors-picks > h3 {
   border: 2px solid black;
   padding: 10px;
