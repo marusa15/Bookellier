@@ -100,7 +100,7 @@ function displayTasteKidSearchData(data) {
 
 var displayDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
-  var teaser = '<p>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a>';
+  var teaser = '<h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a>';
   return element.html(teaser); 
 }
 
