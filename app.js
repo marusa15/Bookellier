@@ -57,7 +57,7 @@ function getDataFromApi(searchTerm, callback) {
 
 // state modification functions
 
-var logClick = function(state, item) { // logs if the user clicked to read more about suggestion
+var logExpand = function(state, item) { // logs if the user clicked to read more about suggestion
   currentItem = getItem(state, item);
   state.Similar.Results[item].expanded = true;
 }
@@ -100,7 +100,8 @@ function displayTasteKidSearchData(data) {
 
 var displayDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
-  var teaser = '<h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a>';
+  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div>';
+  
   return element.html(teaser); 
 }
 
@@ -128,8 +129,8 @@ function watchSubmit() {
 
 $('.js-search-results').on('click', '.more-info', function(event) {
   event.preventDefault();
-  console.log("Yes!");
-  logClick(state, $(this.closest('div')).attr('data-list-item-id'));
+  console.log(state);
+  logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
   displayDescription(state, $('.js-description')); // next() determines WHERE in DOM the description will appear
 })
 
@@ -137,6 +138,8 @@ $('.js-search-results').on('click', '.more-info', function(event) {
 
 $('.js-editors-picks').click(function(event) {
   event.preventDefault();
+
+  $( ".teaser" ).remove();
   displayRecommendations(recommendations, $('.js-search-results'));
 })
 
