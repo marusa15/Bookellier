@@ -52,8 +52,19 @@ main .row {
   margin: 0 30px;
 }
 
+.author {
+  padding: 10px;
+  margin: 0 30px;
+}
+
 .js-description {
   margin-bottom: 100px;
+}
+
+.title2 {
+  font-size: 30px;
+  margin-top: 60px;
+  font-style: italic;
 }
 
 

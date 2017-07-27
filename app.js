@@ -109,7 +109,7 @@ var displayDescription = function (state, element) {
 
 var displayRecommendations = function(recommendations, element) {
   var recommendation = recommendations.map(function(item, index) {
-  return '<div>' + item.Author + ' - ' + item.Title + '</div>'; 
+  return '<div class="col-3"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div></div>'; 
   });
   return  element.html(recommendation);  
 }
