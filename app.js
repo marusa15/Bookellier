@@ -43,7 +43,7 @@ function getDataFromApi(searchTerm, callback) {
       q: searchTerm,
       type: 'books',
       info: 1,
-      limit: 4,
+      limit: 24,
       k: '263777-Bookelli-ZCKH0EIS' 
     },
     dataType: 'jsonp', 
