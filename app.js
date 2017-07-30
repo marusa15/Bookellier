@@ -83,17 +83,34 @@ function displayTasteKidSearchData(data) {
   console.log(state);
   makeShortIntro(state); 
   var resultElement = '';
+  var loadMore = '<div class="js-more"></div><button class="loadMore">Load more</button>';
   if (data.Similar.Results.length > 0) {
      data.Similar.Results.forEach(function(item, index) {
+     if (index < 4) { 
      resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '"><div class="book-cover"><div class="title">' + item.Name + '</div></div></div>';
+     } 
     });
+  resultElement += loadMore;
   }
   
+
   else {
     resultElement += '<p>Sorry, no results. Please try again.</p>';
   }
+
   
   $('.js-search-results').html(resultElement);
+  
+}
+
+function displayMoreResults(state, element) {
+  var resultElement = '';
+  state.Similar.Results.forEach(function(item, index) {
+  if (index >= 4) {
+  resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '"><div class="book-cover"><div class="title">' + item.Name + '</div></div></div>';
+    }
+  });
+  return element.html(resultElement);
 }
 
 //when user clicks 'more', description displays
@@ -138,7 +155,6 @@ $('.js-search-results').on('click', '.more-info', function(event) {
 
 $('.js-editors-picks').click(function(event) {
   event.preventDefault();
-
   $( ".teaser" ).remove();
   displayRecommendations(recommendations, $('.js-search-results'));
 })
@@ -147,6 +163,14 @@ $('.js-search-results').on('click', '.returnToResults', function(event){
   event.preventDefault();
   displayTasteKidSearchData(state, $('.js-search-results'));
 }) 
+
+$('.js-search-results').on('click', '.loadMore', function(event){
+  event.preventDefault();
+  console.log('more!');
+  displayMoreResults(state, $('.js-more'));
+  $('.loadMore').remove();
+
+})
 
 
 
