@@ -25,7 +25,7 @@ main .row {
   padding-top: 18px;
 }
 
-.primary-btn > button {
+.primary-btn > button, .loadMore, .returnToResults {
   padding: 5px 25px;
 }
 
@@ -67,7 +67,7 @@ main .row {
   font-style: italic;
 }
 
-.returnToResults {
+.returnToResults, .loadMore {
   margin-bottom: 50px; 
 }
 
