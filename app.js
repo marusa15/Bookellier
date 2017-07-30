@@ -100,7 +100,7 @@ function displayTasteKidSearchData(data) {
 
 var displayDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
-  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div>';
+  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><button class="returnToResults">Back to search results</button>';
   
   return element.html(teaser); 
 }
@@ -142,6 +142,8 @@ $('.js-editors-picks').click(function(event) {
   $( ".teaser" ).remove();
   displayRecommendations(recommendations, $('.js-search-results'));
 })
+
+
 
 $(function(){ 
   watchSubmit();
