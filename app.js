@@ -143,6 +143,11 @@ $('.js-editors-picks').click(function(event) {
   displayRecommendations(recommendations, $('.js-search-results'));
 })
 
+$('.js-search-results').on('click', '.returnToResults', function(event){
+  event.preventDefault();
+  displayTasteKidSearchData(state, $('.js-search-results'));
+}) 
+
 
 
 $(function(){ 
