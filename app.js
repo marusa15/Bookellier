@@ -151,6 +151,13 @@ $('.js-search-results').on('click', '.more-info', function(event) {
   displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
 })
 
+$('.js-search-results').on('tap', '.more-info', function(event) {
+  event.preventDefault();
+  console.log(state);
+  logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
+  displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
+})
+
 // clicks on Editor's picks button
 
 $('.js-editors-picks').click(function(event) {
