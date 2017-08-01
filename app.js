@@ -9,27 +9,39 @@ var state;
 var recommendations = [
                 {
                   Author: "Alessandro Baricco",
-                  Title: "Mr. Gwin" 
+                  Title: "Mr. Gwin",
+                  Description: "After celebrated author Jasper Gwyn suddenly and publicly announces that he will never write another book, he embarks on a strange new career path as a “copyist,” holding thirty-day sittings in a meticulously appointed room and producing, at the end, brief but profoundly rich portraits in prose. The surprising, beautiful, and even frightening results are received with rapture by their subjects—among them Gwyn’s devoted assistant, Rebecca; a beautiful fabric importer; a landscape painter; Gwyn’s own literary agent; two wealthy newlyweds; a tailor to the Queen; and a very dangerous nineteen-year-old.", 
+                  URL: "https://store.mcsweeneys.net/products/mr-gwyn"
                 },
                 {
                   Author: "Elizabeth Gilbert",
-                  Title: "The Signature of All Things"
+                  Title: "The Signature of All Things",
+                  Description: "Elizabeth Gilbert’s first novel in twelve years is an extraordinary story of botany, exploration and desire, spanning across much of the 19th century. The novel follows the fortunes of the brilliant Alma Whittaker (daughter of a bold and charismatic botanical explorer) as she comes into her own within the world of plants and science. As Alma’s careful studies of moss take her deeper into the mysteries of evolution, the man she loves draws her in the opposite direction—into the realm of the spiritual, the divine and the magical. Alma is a clear-minded scientist; Ambrose is a Utopian artist. But what unites this couple is a shared passion for knowing—a desperate need to understand the workings of this world, and the mechanism behind of all life.",
+                  URL: "https://www.elizabethgilbert.com/books/the-signature-of-all-things/"
                 },
                 {
                   Author: "Patrick Modiano",
-                  Title: "Missing Person" 
+                  Title: "Missing Person", 
+                  Description: "The missing person in the title of Patrick Modiano's novel, winner of the Goncourt Prize for 1978, is the detective himself. Guy Roland suffers from amnesia, the period of his life before launching his career as a private investigator is almost a complete blank. Even his name and nationality are a mystery to him. Now after a career of solving other people's problems, he turns to his own.",
+                  URL: "http://www.postmodernmystery.com/missing_person.html"
                 },
                 {
                   Author: "Rodaan Al Galidi",
-                  Title: "The autist and the carrier-pigeon" 
+                  Title: "The autist and the carrier-pigeon",
+                  Description: "Geert is an autistic boy, born to Janine, his alcoholic mother. He takes things literally and considers language something that means exactly what it says. Take the word in Dutch for ‘to move’ which is ‘verhuizen’ and contains the word ‘ver’, which means ‘far away’. So ‘verhuizen’ should, in Geert’s view, also take place far away. Also, when his mother tells him that he should make a girl wet before making love to her he throws a bucket of water over a girl.",
+                  URL: "http://www.euprizeliterature.eu/author/2011/rodaan-al-galidi"
                 },
                 {
                   Author: "Julian Barnes",
-                  Title: "The sense of an ending" 
+                  Title: "The sense of an ending",
+                  Description: "The Sense of an Ending is a 2011 novel written by British author Julian Barnes. The Sense of an Ending is narrated by a retired man named Tony Webster, who recalls how he and his clique met Adrian Finn at school and vowed to remain friends for life. When the past catches up with Tony, he reflects on the paths he and his friends have taken. In October 2011, The Sense of an Ending was awarded the Man Booker Prize. The following month it was nominated in the novels category at the Costa Book Awards.",
+                  URL: "https://en.wikipedia.org/wiki/The_Sense_of_an_Ending"
                 },
                 {
                   Author: "Paul Auster",
-                  Title: "Brooklyn Follies" 
+                  Title: "Brooklyn Follies",
+                  Description: "Nathan Glass, a retired life insurance salesman estranged from his family and facing an iffy cancer prognosis, is \"looking for a quiet place to die. Someone recommended Brooklyn.\" What he finds, though, in this ebullient novel by Brooklyn bard Auster (Oracle Night ), is a vital, big-hearted borough brimming with great characters. These include Nathan's nephew, Tom, a grad student turned spiritually questing cab driver; Tom's serenely silent nine-year-old niece, who shows up on Tom's doorstep without her unstable mom; and a flamboyant book dealer hatching a scheme to sell a fraudulent manuscript of The Scarlet Letter.",
+                  URL: "https://www.publishersweekly.com/978-0-8050-7714-8"
                 } 
 ]
 
@@ -121,6 +133,8 @@ var displayDescription = function (state, element) {
   
   return element.html(teaser); 
 }
+
+//var displayEditorsDescription = function ()
 
 // displays editor's picks
 
