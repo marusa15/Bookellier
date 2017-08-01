@@ -144,7 +144,7 @@ function watchSubmit() {
 
 //clicks on title to display description
 
-$('.js-search-results').on('click', '.more-info', function(event) {
+$('.js-search-results').on('mousedown touchstart', '.more-info', function(event) {
   event.preventDefault();
   console.log(state);
   logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
