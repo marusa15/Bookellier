@@ -4,9 +4,12 @@ var currentItem;
 
 // saves all user interactions
 
-var state; 
+var state = {}; 
 
-var recommendations = [
+//how to put recommendations inside the state object? 
+
+var recommendations = [];
+state["recommendations"] = [
                 {
                   Author: "Alessandro Baricco",
                   Title: "Mr. Gwin",
@@ -67,11 +70,34 @@ function getDataFromApi(searchTerm, callback) {
 
 }
 
+var googleBooks_URL = 'https://www.googleapis.com/books/v1/volumes';
+
+function getDataFromGBApi(searchTerm, callback) {
+  var settings = {
+    url: googleBooks_URL,
+    data: {
+      q: searchTerm,
+    },
+    dataType: 'jsonp', 
+    type: 'GET',
+    success: callback
+ 
+  }
+  $.ajax(settings);
+
+}
+
+function displayGoogleBooksData(data) {
+  var result = '<img class="cover" src="' + data.items[0].volumeInfo.imageLinks.thumbnail + '">';
+  $('.js-cover').html(result);
+}
+
 // state modification functions
 
 var logExpand = function(state, item) { // logs if the user clicked to read more about suggestion
   currentItem = getItem(state, item);
   state.Similar.Results[item].expanded = true;
+  
 }
 
 // opens a specific result in the array of results
@@ -129,12 +155,15 @@ function displayMoreResults(state, element) {
 
 var displayDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
-  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><button class="returnToResults">Back to search results</button>';
+  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><div class="js-cover"></div><br><button class="returnToResults">Back to search results</button>';
   
   return element.html(teaser); 
 }
 
-//var displayEditorsDescription = function ()
+  var displayEditorsDescription = function (state, element) {
+  var description = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><button class="returnToResults">Back to search results</button>';
+  return element.html(description);
+} 
 
 // displays editor's picks
 
@@ -143,6 +172,11 @@ var displayRecommendations = function(recommendations, element) {
   return '<div class="col-3"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div></div>'; 
   });
   return  element.html(recommendation);  
+}
+
+function displayGoogleBooksData(data) {
+  var result = '<img class="cover" src="' + data.items[0].volumeInfo.imageLinks.thumbnail + '">';
+  $('.js-cover').html(result);
 }
 
 
@@ -158,18 +192,12 @@ function watchSubmit() {
 
 //clicks on title to display description
 
-$('.js-search-results').on('mousedown touchstart', '.more-info', function(event) {
+$('.js-search-results').on('click', '.more-info', function(event) {
   event.preventDefault();
   console.log(state);
   logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
   displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
-})
-
-$('.js-search-results').on('tap', '.more-info', function(event) {
-  event.preventDefault();
-  console.log(state);
-  logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
-  displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
+  getDataFromGBApi($(this.closest('div')).text(), displayGoogleBooksData);
 })
 
 // clicks on Editor's picks button
