@@ -43,7 +43,7 @@ main .row {
   border: 2px solid black;
   padding: 20px 0 0 0;
   margin: 30px 40px;
-  height: 300px;
+  height: 350px;
 }
 
 .title {
@@ -63,7 +63,6 @@ main .row {
 
 .title2 {
   font-size: 30px;
-  margin-top: 60px;
   font-style: italic;
 }
 
