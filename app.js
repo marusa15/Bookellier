@@ -106,20 +106,12 @@ function getItem(state, itemIndex) {
     return state.Similar.Results[itemIndex];    
 }
 
-// saves short description into state
-
-var makeShortIntro = function(state) {
-   state.Similar.Results.forEach(function(item) {
-   item["Intro"] = item.wTeaser[0];
-    });
-} 
-
 // display functions 
 
 function displayTasteKidSearchData(data) {
   state = data;
   console.log(state);
-  makeShortIntro(state); 
+  
   var resultElement = '';
   var loadMore = '<div class="js-more"></div><button class="loadMore">Load more</button>';
   if (data.Similar.Results.length > 0) {
