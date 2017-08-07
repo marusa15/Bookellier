@@ -93,10 +93,7 @@ function getDataFromGBApi(searchTerm, callback) {
 
 }
 
-function displayGoogleBooksData(data) {
-  var result = '<img class="cover" src="' + data.items[0].volumeInfo.imageLinks.thumbnail + '">';
-  $('.js-cover').html(result);
-}
+
 
 // state modification functions
 
@@ -106,10 +103,21 @@ var logExpand = function(state, item) { // logs if the user clicked to read more
   
 }
 
+
+
 // opens a specific result in the array of results
 
 function getItem(state, itemIndex) {
     return state.Similar.Results[itemIndex];    
+}
+
+var logEditorExpand = function(recommendations, item) {
+  currentItem = getEditorItem(recommendations, item);
+  recommendations[item].expanded = true;
+}
+
+function getEditorItem(recommendations, itemIndex) {
+    return recommendations[itemIndex];
 }
 
 // display functions 
@@ -158,16 +166,21 @@ var displayDescription = function (state, element) {
   return element.html(teaser); 
 }
 
-  var displayEditorsDescription = function (state, element) {
-  var description = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><button class="returnToResults">Back to search results</button>';
+  var displayEditorsDescription = function (recommendations, element) {
+  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="js-editors-picks">Back to Editor\'s picks</button>';
   return element.html(description);
 } 
+
+function displayGoogleBooksData(data) {
+  var result = '<img class="cover" src="' + data.items[0].volumeInfo.imageLinks.thumbnail + '">';
+  $('.js-cover').html(result);
+}
 
 // displays editor's picks
 
 var displayRecommendations = function(recommendations, element) {
   var recommendation = recommendations.map(function(item, index) {
-  return '<div class="col-3"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
+  return '<div class="col-3 more-info" data-list-item-id="' + index + '"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
   });
   return  element.html(recommendation);  
 }
@@ -188,6 +201,16 @@ function watchSubmit() {
    });
 }
 
+
+$('.js-search-results').on('click', '.loadMore', function(event){
+  event.preventDefault();
+  console.log('more!');
+  displayMoreResults(state, $('.js-more'));
+  $('.loadMore').remove();
+
+})
+
+
 //clicks on title to display description
 
 $('.js-search-results').on('click', '.more-info', function(event) {
@@ -198,26 +221,32 @@ $('.js-search-results').on('click', '.more-info', function(event) {
   getDataFromGBApi($(this.closest('div')).text(), displayGoogleBooksData);
 })
 
-// clicks on Editor's picks button
-
-$('.js-editors-picks').click(function(event) {
-  event.preventDefault();
-  $( ".teaser" ).remove();
-  displayRecommendations(recommendations, $('.js-search-results'));
-})
+// return to search results
 
 $('.js-search-results').on('click', '.returnToResults', function(event){
   event.preventDefault();
   displayTasteKidSearchData(state, $('.js-search-results'));
 }) 
 
-$('.js-search-results').on('click', '.loadMore', function(event){
-  event.preventDefault();
-  console.log('more!');
-  displayMoreResults(state, $('.js-more'));
-  $('.loadMore').remove();
 
+// clicks on Editor's picks button
+
+$('.js-editors-picks').click(function(event) {
+  event.preventDefault();
+  $( ".teaser" ).remove();
+  console.log(recommendations);
+  displayRecommendations(recommendations, $('.js-editorial'));
 })
+
+// clicks on editor's picks items to display description
+
+$('.js-editorial').on('click', '.col-3', function(event) {
+    event.preventDefault();
+    console.log("more info on editors picks!");
+    logEditorExpand(recommendations, $(this.closest('div')).attr('data-list-item-id'));
+    displayEditorsDescription(recommendations, $('.js-editorial'));
+})
+
 
 
 
