@@ -74,6 +74,17 @@ main .row {
   margin: 20px;
 }
 
+.logo-icon {
+  width: 50px;
+}
+
+.logo-icon, .logo-title, .catchphrase {
+  display: inline-block;
+}
+
+h1.logo-title {
+  margin: 0.67em;
+}
 
 
 
