@@ -167,7 +167,7 @@ var displayDescription = function (state, element) {
 }
 
   var displayEditorsDescription = function (recommendations, element) {
-  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="js-editors-picks">Back to Editor\'s picks</button>';
+  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="returnToResults">Back to Editor\'s picks</button>';
   return element.html(description);
 } 
 
@@ -197,6 +197,7 @@ function watchSubmit() {
   $('.js-search-form').submit(function(e) {
     e.preventDefault();
     var query = $(this).find('.js-query').val();
+    $('.js-editorial').remove();
     getDataFromApi(query, displayTasteKidSearchData);
    });
 }
