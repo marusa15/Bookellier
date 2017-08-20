@@ -98,12 +98,11 @@ function getDataFromGBApi(searchTerm, callback) {
 // state modification functions
 
 var logExpand = function(state, item) { // logs if the user clicked to read more about suggestion
-  currentItem = getItem(state, item);
-  state.Similar.Results[item].expanded = true;
   
+  currentItem = getItem(state, item);
+  state.Current = item;
+  state.Similar.Results[item].expanded = true;
 }
-
-
 
 // opens a specific result in the array of results
 
@@ -197,7 +196,7 @@ function watchSubmit() {
   $('.js-search-form').submit(function(e) {
     e.preventDefault();
     var query = $(this).find('.js-query').val();
-    $('.js-editorial').remove();
+    $('.js-editorial').empty();
     getDataFromApi(query, displayTasteKidSearchData);
    });
 }
@@ -216,17 +215,22 @@ $('.js-search-results').on('click', '.loadMore', function(event){
 
 $('.js-search-results').on('click', '.more-info', function(event) {
   event.preventDefault();
-  console.log(state);
+  
   logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
   displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
   getDataFromGBApi($(this.closest('div')).text(), displayGoogleBooksData);
+  console.log(state);
 })
 
 // return to search results
 
 $('.js-search-results').on('click', '.returnToResults', function(event){
   event.preventDefault();
+ // logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
   displayTasteKidSearchData(state, $('.js-search-results'));
+  if (state.Current > 3) {
+    displayMoreResults(state, $('.js-more'));
+  }
 }) 
 
 
