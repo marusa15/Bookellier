@@ -146,7 +146,7 @@ function displayTasteKidSearchData(data) {
   
 }
 
-function displayMoreResults(state, element) {
+function displayMoreSearchResults(state, element) {
   var resultElement = '';
   state.Similar.Results.forEach(function(item, index) {
   if (index >= 4) {
@@ -158,15 +158,24 @@ function displayMoreResults(state, element) {
 
 //when user clicks 'more', description displays
 
-var displayDescription = function (state, element) {
+var displaySearchResultsDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
   var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><div class="js-cover"></div><br><button class="returnToResults">Back to search results</button>';
   
   return element.html(teaser); 
 }
 
+// displays editor's picks
+
+var displayEditorsPicks = function(recommendations, element) {
+  var recommendation = recommendations.map(function(item, index) {
+  return '<div class="col-3 more-info-editor" data-list-item-id="' + index + '"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
+  });
+  return  element.html(recommendation);  
+}
+
   var displayEditorsDescription = function (recommendations, element) {
-  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="returnToResults">Back to Editor\'s picks</button>';
+  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="returnToResults returnToEditorsPicks">Back to Editor\'s picks</button>';
   return element.html(description);
 } 
 
@@ -175,81 +184,70 @@ function displayGoogleBooksData(data) {
   $('.js-cover').html(result);
 }
 
-// displays editor's picks
-
-var displayRecommendations = function(recommendations, element) {
-  var recommendation = recommendations.map(function(item, index) {
-  return '<div class="col-3 more-info" data-list-item-id="' + index + '"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
-  });
-  return  element.html(recommendation);  
-}
-
-function displayGoogleBooksData(data) {
-  var result = '<img class="cover" src="' + data.items[0].volumeInfo.imageLinks.thumbnail + '">';
-  $('.js-cover').html(result);
-}
 
 
 // event listeners
 
-function watchSubmit() {
-  $('.js-search-form').submit(function(e) {
-    e.preventDefault();
+// search
+
+function watchSubmit() { // submit search
+  $('.js-search-form').submit(function(event) {
+    event.preventDefault();
     var query = $(this).find('.js-query').val();
-    $('.js-editorial').empty();
+    $('.js-editorial').remove();
     getDataFromApi(query, displayTasteKidSearchData);
    });
 }
 
+// more search results
 
 $('.js-search-results').on('click', '.loadMore', function(event){
   event.preventDefault();
   console.log('more!');
-  displayMoreResults(state, $('.js-more'));
+  displayMoreSearchResults(state, $('.js-more'));
   $('.loadMore').remove();
 
 })
 
 
-//clicks on title to display description
+//expand search result
 
 $('.js-search-results').on('click', '.more-info', function(event) {
   event.preventDefault();
   
   logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
-  displayDescription(state, $('.js-search-results')); // next() determines WHERE in DOM the description will appear
+  displaySearchResultsDescription(state, $('.js-search-results'));
   getDataFromGBApi($(this.closest('div')).text(), displayGoogleBooksData);
   console.log(state);
 })
 
-// return to search results
+// return to search results list
 
 $('.js-search-results').on('click', '.returnToResults', function(event){
   event.preventDefault();
- // logExpand(state, $(this.closest('div')).attr('data-list-item-id'));
   displayTasteKidSearchData(state, $('.js-search-results'));
   if (state.Current > 3) {
-    displayMoreResults(state, $('.js-more'));
+    displayMoreSearchResults(state, $('.js-more'));
   }
 }) 
 
 
-// clicks on Editor's picks button
+// Editor's picks
 
 $('.js-editors-picks').click(function(event) {
   event.preventDefault();
   $( ".teaser" ).remove();
   console.log(recommendations);
-  displayRecommendations(recommendations, $('.js-editorial'));
+  displayEditorsPicks(recommendations, $('.js-search-results'));
 })
 
-// clicks on editor's picks items to display description
+// display editor's picks description
 
-$('.js-editorial').on('click', '.col-3', function(event) {
+$('.js-search-results').on('click', '.more-info-editor', function(event) {
     event.preventDefault();
     console.log("more info on editors picks!");
     logEditorExpand(recommendations, $(this.closest('div')).attr('data-list-item-id'));
-    displayEditorsDescription(recommendations, $('.js-editorial'));
+    displayEditorsDescription(recommendations, $('.js-search-results'));
 })
 
 
