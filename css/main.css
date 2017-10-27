@@ -5,7 +5,6 @@ main .row {
 }
 
 .box {
-  height: 160px;
   text-align: center;
   padding-top: 10px;
 }
@@ -14,10 +13,16 @@ main .row {
   border-bottom: 2px solid black;
 }
 
-.js-query {
- width: 500px;
- padding: 10px;
- text-align: left;
+.js-search-input {
+     padding: 10px;
+     text-align: left;
+     width: 360px;
+}
+
+@media only screen and (min-width: 730px) {
+  .js-search-input {
+     width: 500px;
+  }
 }
 
 .primary-btn {
@@ -25,7 +30,7 @@ main .row {
   padding-top: 18px;
 }
 
-.primary-btn > button, .loadMore, .returnToResults {
+.primary-btn > button, .loadMore, .returnToResults, .returnToEditorsPicks {
   padding: 5px 25px;
 }
 
@@ -66,7 +71,7 @@ main .row {
   font-style: italic;
 }
 
-.returnToResults, .loadMore {
+.returnToResults, .loadMore, .returnToEditorsPicks {
   margin-bottom: 50px; 
 }
 
