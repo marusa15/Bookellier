@@ -177,7 +177,9 @@ var displayEditorsPicks = function(recommendations, element) {
 }
 
   var displayEditorsDescription = function (recommendations, element) {
-  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="returnToEditorsPicks">Back to Editor\'s picks</button>';
+  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description:' + 
+  ' </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + 
+  currentItem.URL + '</a></div><br><button class="returnToEditorsPicks">Back to Editor\'s picks</button>';
   return element.html(description);
 } 
 
@@ -251,10 +253,11 @@ $('.js-search-results').on('click', '.more-info-editor', function(event) {
     displayEditorsDescription(recommendations, $('.js-search-results'));
 })
 
-$('.js-editors-picks').on('click', '.js-editors-picks', function(event) {
+// go back to 
+
+$('.js-search-results').on('click', '.returnToEditorsPicks', function(event) {
   event.preventDefault();
   $( ".teaser" ).remove();
-  
   displayEditorsPicks(recommendations, $('.js-search-results'));
 })
 
