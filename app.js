@@ -160,7 +160,9 @@ function displayMoreSearchResults(state, element) {
 
 var displaySearchResultsDescription = function (state, element) {
   var teaser = currentItem.wTeaser;
-  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl + '</a></div><br><div class="js-cover"></div><br><button class="returnToResults">Back to search results</button>';
+  var teaser = '<div class="teaser"><h2>' + currentItem.Name + '</h2><br> <span><b>Description: </b></span>' + teaser 
+  + '<br> <p>More info: </p><a href="' + currentItem.wUrl + '">' + currentItem.wUrl 
+  + '</a></div><br><div class="js-cover"></div><br><button class="returnToResults .js-editors-picks">Back to search results</button>';
   
   return element.html(teaser); 
 }
@@ -175,7 +177,7 @@ var displayEditorsPicks = function(recommendations, element) {
 }
 
   var displayEditorsDescription = function (recommendations, element) {
-  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="returnToResults returnToEditorsPicks">Back to Editor\'s picks</button>';
+  var description = '<div class="teaser"><h2>' + currentItem.Title + '</h2><br> <span><b>Description: </b></span>' + currentItem.Description + '<br> <p>More info: </p><a href="' + currentItem.URL + '">' + currentItem.URL + '</a></div><br><button class="returnToEditorsPicks">Back to Editor\'s picks</button>';
   return element.html(description);
 } 
 
@@ -193,7 +195,7 @@ function displayGoogleBooksData(data) {
 function watchSubmit() { // submit search
   $('.js-search-form').submit(function(event) {
     event.preventDefault();
-    var query = $(this).find('.js-query').val();
+    var query = $(this).find('.js-search-input').val();
     $('.js-editorial').remove();
     getDataFromApi(query, displayTasteKidSearchData);
    });
@@ -234,10 +236,9 @@ $('.js-search-results').on('click', '.returnToResults', function(event){
 
 // Editor's picks
 
-$('.js-editors-picks').click(function(event) {
+$('.js-editors-picks').on('click', function(event) {
   event.preventDefault();
   $( ".teaser" ).remove();
-  console.log(recommendations);
   displayEditorsPicks(recommendations, $('.js-search-results'));
 })
 
@@ -248,6 +249,13 @@ $('.js-search-results').on('click', '.more-info-editor', function(event) {
     console.log("more info on editors picks!");
     logEditorExpand(recommendations, $(this.closest('div')).attr('data-list-item-id'));
     displayEditorsDescription(recommendations, $('.js-search-results'));
+})
+
+$('.js-editors-picks').on('click', '.js-editors-picks', function(event) {
+  event.preventDefault();
+  $( ".teaser" ).remove();
+  
+  displayEditorsPicks(recommendations, $('.js-search-results'));
 })
 
 
