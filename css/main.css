@@ -39,20 +39,27 @@ main .row {
 }
 
 .editors-picks > h3 {
-  border: 2px solid black;
   padding: 10px;
   margin: 10px 0;
 }
 
 .book-cover {
   border: 2px solid black;
-  padding: 20px 0 0 0;
+  padding: 10px;
   margin: 30px 40px;
-  height: 350px;
+  background-color: grey;
+  border-radius: 10px;
+}
+
+.book-icon, .result-text {
+  display: inline-block;
+}
+
+.result-text {
+    max-width: 300px;
 }
 
 .title {
-  border: 2px solid black;
   padding: 10px;
   margin: 0 30px;
 }

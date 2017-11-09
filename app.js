@@ -119,28 +119,46 @@ function getEditorItem(recommendations, itemIndex) {
     return recommendations[itemIndex];
 }
 
+function getFirstSentenceFromTeaser(text) {
+  var sentenceArray = text.split('. ');
+  var cropSentenceArray = sentenceArray[0].split('');
+  
+  if (cropSentenceArray.length <= 70) {
+    return sentenceArray[0];
+  }
+  else {
+    return sentenceArray[0].substring(0, 66);
+  }
+} 
+
 // display functions 
+
+function displayAnyResults(item, index) {
+  var text = getFirstSentenceFromTeaser(item.wTeaser);
+  return '<div class="col-6 more-info" data-list-item-id="'+ index + 
+     '"><div class="book-cover"><div class="book-icon"><img src="css/book-icon-72-191918.png"></div><div class="result-text">' + 
+     '<div class="title">' + item.Name + '</div><div class="first-sentence">' + text +'...MORE</div></div></div></div>';
+}
 
 function displayTasteKidSearchData(data) {
   state = data;
-  console.log(state);
-  
+    
   var resultElement = '';
   var loadMore = '<div class="js-more"></div><button class="loadMore">Load more</button>';
+
   if (data.Similar.Results.length > 0) {
      data.Similar.Results.forEach(function(item, index) {
+    // var text = getFirstSentenceFromTeaser(item.wTeaser); 
      if (index < 4) { 
-     resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '"><div class="book-cover"><div class="title">' + item.Name + '</div></div></div>';
+        resultElement += displayAnyResults(item, index);
      } 
     });
   resultElement += loadMore;
   }
-  
 
   else {
     resultElement += '<p>Sorry, no results. Please try again.</p>';
   }
-
   
   $('.js-search-results').html(resultElement);
   
@@ -150,7 +168,7 @@ function displayMoreSearchResults(state, element) {
   var resultElement = '';
   state.Similar.Results.forEach(function(item, index) {
   if (index >= 4) {
-  resultElement += '<div class="col-3 more-info" data-list-item-id="'+ index + '"><div class="book-cover"><div class="title">' + item.Name + '</div></div></div>';
+  resultElement += displayAnyResults(item, index);
     }
   });
   return element.html(resultElement);
@@ -253,7 +271,7 @@ $('.js-search-results').on('click', '.more-info-editor', function(event) {
     displayEditorsDescription(recommendations, $('.js-search-results'));
 })
 
-// go back to 
+// go back to editor's picks
 
 $('.js-search-results').on('click', '.returnToEditorsPicks', function(event) {
   event.preventDefault();
