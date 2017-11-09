@@ -137,7 +137,7 @@ function displayAnyResults(item, index) {
   var text = getFirstSentenceFromTeaser(item.wTeaser);
   return '<div class="col-6 more-info" data-list-item-id="'+ index + 
      '"><div class="book-cover"><div class="book-icon"><img src="css/book-icon-72-191918.png"></div><div class="result-text">' + 
-     '<div class="title">' + item.Name + '</div><div class="first-sentence">' + text +'...MORE</div></div></div></div>';
+     '<div class="title">' + item.Name + '</div><div class="first-sentence">' + text +'...</div></div></div></div>';
 }
 
 function displayTasteKidSearchData(data) {
@@ -148,7 +148,7 @@ function displayTasteKidSearchData(data) {
 
   if (data.Similar.Results.length > 0) {
      data.Similar.Results.forEach(function(item, index) {
-    // var text = getFirstSentenceFromTeaser(item.wTeaser); 
+     
      if (index < 4) { 
         resultElement += displayAnyResults(item, index);
      } 
@@ -189,7 +189,7 @@ var displaySearchResultsDescription = function (state, element) {
 
 var displayEditorsPicks = function(recommendations, element) {
   var recommendation = recommendations.map(function(item, index) {
-  return '<div class="col-3 more-info-editor" data-list-item-id="' + index + '"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
+  return '<div class="col-6 more-info-editor" data-list-item-id="' + index + '"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
   });
   return  element.html(recommendation);  
 }
