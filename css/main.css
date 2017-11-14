@@ -4,13 +4,18 @@ main .row {
   margin-bottom: 20px;
 }
 
+main {
+  font-family: 'Lora', serif;
+}
+
 .box {
   text-align: center;
   padding-top: 10px;
 }
 
-.header {
-  border-bottom: 2px solid black;
+.attention {
+  font-family: 'Lora', serif;
+  background-color: #eff2f7;
 }
 
 .js-search-input {
@@ -87,9 +92,8 @@ main .row {
 }
 
 .logo-icon {
-  width: 50px;
+  width: 250px;
 }
-
 .logo-icon, .logo-title, .catchphrase {
   display: inline-block;
 }
