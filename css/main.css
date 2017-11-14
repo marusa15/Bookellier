@@ -72,6 +72,7 @@ main {
 .title {
   padding: 10px;
   margin: 0 30px;
+  font-style: italic;
 }
 
 .author {
