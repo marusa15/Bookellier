@@ -8,6 +8,12 @@ main {
   font-family: 'Lora', serif;
 }
 
+
+.logo {
+  font-family: 'Sacramento', cursive;
+  font-size: 350%;
+}
+
 .box {
   text-align: center;
   padding-top: 10px;
@@ -49,10 +55,9 @@ main {
 }
 
 .book-cover {
-  border: 2px solid black;
   padding: 10px;
   margin: 30px 40px;
-  background-color: grey;
+  background-color: #eff2f7;
   border-radius: 10px;
 }
 
