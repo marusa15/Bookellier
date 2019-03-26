@@ -2,6 +2,8 @@
 
 var currentItem;
 
+var off;
+
 // saves all user interactions
 
 var state = {}; 
@@ -65,7 +67,7 @@ function getDataFromApi(searchTerm, callback) {
       type: 'books',
       info: 1,
       limit: 24,
-      k: '263777-Bookelli-ZCKH0EIS' 
+      k: '263777-Bookelli-DJJIUMJC' 
     },
     dataType: 'jsonp', 
     type: 'GET',
@@ -190,7 +192,9 @@ var displaySearchResultsDescription = function (state, element) {
 var displayEditorsPicks = function(recommendations, element) {
   var recommendation = recommendations.map(function(item, index) {
   return '<div class="col-6 more-info-editor" data-list-item-id="' + index + '"><div class="book-cover"><div class="author">' + item.Author + '</div><div class="title2">' + item.Title + '</div><img src="' + item.image +'">'; 
+  
   });
+  console.log(recommendation);
   return  element.html(recommendation);  
 }
 
@@ -212,12 +216,15 @@ function displayGoogleBooksData(data) {
 
 // search
 
+
+
 function watchSubmit() { // submit search
   $('.js-search-form').submit(function(event) {
     event.preventDefault();
     var query = $(this).find('.js-search-input').val();
     $('.js-editorial').remove();
     getDataFromApi(query, displayTasteKidSearchData);
+    
    });
 }
 
