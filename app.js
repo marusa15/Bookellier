@@ -32,20 +32,20 @@ var recommendations = [
                   URL: "http://www.postmodernmystery.com/missing_person.html",
                   image: "https://books.google.com/books/content?id=17CviLrWNj4C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
                 },
-                {
+              /*  {
                   Author: "Rodaan Al Galidi",
                   Title: "The autist and the carrier-pigeon",
                   Description: "Geert is an autistic boy, born to Janine, his alcoholic mother. He takes things literally and considers language something that means exactly what it says. Take the word in Dutch for ‘to move’ which is ‘verhuizen’ and contains the word ‘ver’, which means ‘far away’. So ‘verhuizen’ should, in Geert’s view, also take place far away. Also, when his mother tells him that he should make a girl wet before making love to her he throws a bucket of water over a girl.",
                   URL: "http://www.euprizeliterature.eu/author/2011/rodaan-al-galidi",
-                //  image: "http://www.euprizeliterature.eu/files/images/book-covers/NL.jpg"
+                  image: "https://commons.wikimedia.org/wiki/File:Rodaan_Al_Galidi_-_Feest_der_Letteren_2016-1.jpg"
 
-                },
+                }, */
                 {
                   Author: "Julian Barnes",
                   Title: "The sense of an ending",
                   Description: "The Sense of an Ending is a 2011 novel written by British author Julian Barnes. The Sense of an Ending is narrated by a retired man named Tony Webster, who recalls how he and his clique met Adrian Finn at school and vowed to remain friends for life. When the past catches up with Tony, he reflects on the paths he and his friends have taken. In October 2011, The Sense of an Ending was awarded the Man Booker Prize. The following month it was nominated in the novels category at the Costa Book Awards.",
                   URL: "https://en.wikipedia.org/wiki/The_Sense_of_an_Ending",
-                  image: "http://books.google.com/books/content?id=bm2jf5Cf8LIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                  image: "http://books.google.com/books/content?id=bm2jf5Cf8LIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
                 },
                 {
                   Author: "Paul Auster",
